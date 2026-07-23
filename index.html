@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Yash Tewari — Software Engineer. Interactive terminal portfolio. Backend, distributed systems and Generative AI. Jupiter Money, IIT Roorkee 2026.">
+<meta name="description" content="Yash Tewari — Software Engineer. Interactive terminal portfolio.">
 <title>Yash Tewari — Software Engineer</title>
 </head>
 <body>
@@ -235,31 +235,53 @@
   });
 
   var PROJECTS={
-    'low-light':{title:'Low-Light Image Enhancement', repo:'low-light-image-enhancement',
+    'low-light':{title:'Low-Light Image Enhancement', repo:'low-light-image-enhancement', feat:true,
       tech:'Python · TensorFlow · CNNs · Self-Attention',
       body:'Extended the <b>MIRNet</b> deep CNN with <b>self-attention</b> for long-range spatial\n'+
            'dependency modeling in degraded images; optimized the TF training pipeline to\n'+
            'beat baselines. <span class="val">PSNR ~62</span> · <span class="ok">1st place</span>, IIT Roorkee Hackathon 2024 (50+ teams).'},
-    'pdf-qa':{title:'PDF Question-Answering System', repo:'pdf-qa-rag',
+    'pdf-qa':{title:'PDF Question-Answering System', repo:'pdf-qa-rag', feat:true,
       tech:'Python · BERT · LangChain · FAISS · FastAPI · RAG',
       body:'Fine-tuned <b>BERT</b> on SQuAD for extractive QA, wrapped in a <b>RAG</b> pipeline\n'+
            '(LangChain + FAISS) over FastAPI. <span class="val">+18%</span> accuracy · <span class="val">−40%</span> latency · <span class="val">−25%</span> hallucination.'},
-    'dashboard':{title:'Full-Stack Content Dashboard', repo:'Web-Annotator-Project',
+    'dashboard':{title:'Full-Stack Content Dashboard', repo:'Web-Annotator-Project', feat:true,
       tech:'React · Node.js · PostgreSQL · LLaMA · Flask · JWT',
       body:'3-tier reading dashboard + custom <b>Chrome extension</b> for persistent highlights.\n'+
-           'Summaries run on a local <b>LLaMA</b> Flask backend — <span class="val">−100%</span> cloud inference cost.'}
+           'Summaries run on a local <b>LLaMA</b> Flask backend — <span class="val">−100%</span> cloud inference cost.'},
+    'dbt-coach':{title:'DBT Coach — RAG Chatbot', repo:'BasicRag',
+      tech:'Python · RAG · FAISS · Sentence-Transformers · Gradio',
+      body:'A RAG chatbot answering DBT questions grounded in a source workbook — <b>MiniLM</b>\n'+
+           'embeddings + <b>FAISS</b> retrieval feeding a streamed <b>Zephyr-7B</b> reply.'},
+    'particle':{title:'Particle Detection & Segmentation', repo:'Particle-Detection',
+      tech:'Python · OpenCV · NumPy',
+      body:'Computer-vision pipeline that segments and measures particles via <b>boundary</b>,\n'+
+           '<b>watershed</b> and <b>colour</b> methods, exporting per-object metrics to CSV.'},
+    'microfeed':{title:'microfeed — social feed', repo:'FLASK-SOCIAL-MEDIA-NETWORK',
+      tech:'Python · Flask · SQLite',
+      body:'A tiny social feed — styled newest-first timeline, Post/Redirect/Get, and an\n'+
+           'auto-created SQLite store.'},
+    'flaskblog':{title:'FlaskBlog — CRUD blog', repo:'Flask',
+      tech:'Python · Flask · SQLite · Jinja',
+      body:'A minimal CRUD blog: create, read, edit and delete posts with validation and\n'+
+           'flash messages.'}
   };
   function repoLink(r){ return '<a class="p focusable" href="https://github.com/dranxer/'+r+'" target="_blank" rel="noopener">github.com/dranxer/'+r+'</a>'; }
 
-  def('projects','list featured projects', function(){
-    var lines=Object.keys(PROJECTS).map(function(id){
+  def('projects','list all projects', function(){
+    function fmt(id){
       var p=PROJECTS[id];
       return '  <span class="k">'+id.padEnd(11)+'</span><b>'+p.title+'</b>\n'+
              '  '+' '.repeat(11)+'<span class="dim">'+p.tech+'</span>';
-    }).join('\n\n');
-    return '<span class="h">// projects</span>\n\n'+lines+
-      '\n\n<span class="dim">→ run </span><span class="p">open low-light</span><span class="dim"> (or pdf-qa / dashboard) for details.</span>'+
-      '\n<span class="dim">→ more on </span><span class="p">github</span><span class="dim">: competitive-programming archives, Flask apps, and more.</span>';
+    }
+    var ids=Object.keys(PROJECTS);
+    var feat=ids.filter(function(id){return PROJECTS[id].feat;});
+    var more=ids.filter(function(id){return !PROJECTS[id].feat;});
+    return '<span class="h">// projects</span>\n\n'+
+      feat.map(fmt).join('\n\n')+
+      '\n\n<span class="dim">── more builds ──</span>\n\n'+
+      more.map(fmt).join('\n\n')+
+      '\n\n<span class="dim">→ run </span><span class="p">open '+ids[0]+'</span><span class="dim"> (or any id above) for details.</span>'+
+      '\n<span class="dim">→ also on </span><span class="p">github</span><span class="dim">: competitive-programming archives (LeetCode, CSES, SPOJ).</span>';
   });
 
   def('open','open a project: open <id>', function(args){
@@ -452,7 +474,7 @@
       '<span class="dim">portfolio.sh — booting…</span>',
       '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] mounting /experience /projects /skills</span>',
       '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] kafka consumer group attached · lag 0</span>',
-      '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] loaded 3 services · 3 featured projects</span>'
+      '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] loaded 3 services · 7 projects</span>'
     ];
     var i=0;
     (function tick(){
