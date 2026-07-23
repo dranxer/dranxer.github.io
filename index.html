@@ -3,518 +3,474 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Yash Tewari — Software Engineer. Backend, distributed systems and Generative AI. Jupiter Money, IIT Roorkee 2026.">
+<meta name="description" content="Yash Tewari — Software Engineer. Interactive terminal portfolio. Backend, distributed systems and Generative AI. Jupiter Money, IIT Roorkee 2026.">
 <title>Yash Tewari — Software Engineer</title>
 </head>
 <body>
 <style>
-  /* ============ TOKENS ============ */
   :root{
-    --bg:#EEF0F3; --bg-2:#F6F7F9; --bg-3:#FFFFFF;
-    --border:#D9DDE4; --border-strong:#C4CAD4;
-    --text:#151922; --muted:#5A616D; --faint:#878E9A;
-    --accent:#A65D0C; --accent-bright:#C77A17;
-    --accent-fill:#E9A23B; --accent-ink:#1B1305;
-    --accent-soft:rgba(199,122,23,.10);
-    --shadow:0 1px 2px rgba(20,25,35,.04),0 8px 30px rgba(20,25,35,.06);
-    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;
-    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --bg:#0A0D13; --bar:#11151E; --fg:#D8DEE9; --dim:#6B7382; --dimmer:#454C59;
+    --amber:#E9A23B; --amber2:#F2B457; --cyan:#5CC8D8; --green:#7BC67B;
+    --red:#E06C6C; --violet:#B98BE0; --border:#1D2430; --sel:rgba(233,162,59,.28);
+    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,"Liberation Mono",monospace;
   }
-  @media (prefers-color-scheme:dark){
+  @media (prefers-color-scheme:light){
     :root{
-      --bg:#0B0E14; --bg-2:#111621; --bg-3:#161C28;
-      --border:#232B3A; --border-strong:#333D50;
-      --text:#E6E9EF; --muted:#909AAA; --faint:#6B7484;
-      --accent:#E9A23B; --accent-bright:#F2B457;
-      --accent-fill:#E9A23B; --accent-ink:#1B1305;
-      --accent-soft:rgba(233,162,59,.12);
-      --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.35);
+      --bg:#F4F6F8; --bar:#E7ECF1; --fg:#1B212B; --dim:#6A7280; --dimmer:#A7AEBA;
+      --amber:#A85E0B; --amber2:#8C4E08; --cyan:#127885; --green:#2E7D32;
+      --red:#C0392B; --violet:#7B54B0; --border:#D5DBE3; --sel:rgba(168,94,11,.22);
     }
   }
-  :root[data-theme="light"]{
-    --bg:#EEF0F3; --bg-2:#F6F7F9; --bg-3:#FFFFFF;
-    --border:#D9DDE4; --border-strong:#C4CAD4;
-    --text:#151922; --muted:#5A616D; --faint:#878E9A;
-    --accent:#A65D0C; --accent-bright:#C77A17;
-    --accent-fill:#E9A23B; --accent-ink:#1B1305;
-    --accent-soft:rgba(199,122,23,.10);
-    --shadow:0 1px 2px rgba(20,25,35,.04),0 8px 30px rgba(20,25,35,.06);
-  }
   :root[data-theme="dark"]{
-    --bg:#0B0E14; --bg-2:#111621; --bg-3:#161C28;
-    --border:#232B3A; --border-strong:#333D50;
-    --text:#E6E9EF; --muted:#909AAA; --faint:#6B7484;
-    --accent:#E9A23B; --accent-bright:#F2B457;
-    --accent-fill:#E9A23B; --accent-ink:#1B1305;
-    --accent-soft:rgba(233,162,59,.12);
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.35);
+    --bg:#0A0D13; --bar:#11151E; --fg:#D8DEE9; --dim:#6B7382; --dimmer:#454C59;
+    --amber:#E9A23B; --amber2:#F2B457; --cyan:#5CC8D8; --green:#7BC67B;
+    --red:#E06C6C; --violet:#B98BE0; --border:#1D2430; --sel:rgba(233,162,59,.28);
+  }
+  :root[data-theme="light"]{
+    --bg:#F4F6F8; --bar:#E7ECF1; --fg:#1B212B; --dim:#6A7280; --dimmer:#A7AEBA;
+    --amber:#A85E0B; --amber2:#8C4E08; --cyan:#127885; --green:#2E7D32;
+    --red:#C0392B; --violet:#7B54B0; --border:#D5DBE3; --sel:rgba(168,94,11,.22);
   }
 
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  ::selection{background:var(--sel)}
+  html,body{height:100%}
   body{
-    margin:0;background:var(--bg);color:var(--text);
-    font-family:var(--sans);font-size:16px;line-height:1.65;
-    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    margin:0;background:var(--bg);color:var(--fg);font-family:var(--mono);
+    font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;
+    display:flex;align-items:center;justify-content:center;padding:min(3.5vw,26px);
   }
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-  .wrap{max-width:1000px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
-
-  /* ============ MONO LABEL ============ */
-  .label{
-    font-family:var(--mono);font-size:.72rem;font-weight:600;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
-    display:inline-flex;align-items:center;gap:.6em;
+  .term{
+    width:min(960px,100%);height:min(84vh,760px);display:flex;flex-direction:column;
+    background:var(--bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.45),0 2px 0 rgba(255,255,255,.02) inset;
+    position:relative;
   }
-  .label::before{content:"";width:14px;height:1px;background:var(--accent);display:inline-block}
+  @media (prefers-color-scheme:light){.term{box-shadow:0 24px 60px rgba(20,25,35,.14)}}
 
-  /* ============ NAV ============ */
-  nav{
-    position:sticky;top:0;z-index:50;
-    background:color-mix(in srgb,var(--bg) 82%,transparent);
-    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
+  .bar{
+    display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bar);
+    border-bottom:1px solid var(--border);flex:0 0 auto;user-select:none;
   }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
-  .monogram{
-    font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.05em;
-    border:1px solid var(--border-strong);border-radius:6px;padding:.35em .6em;color:var(--text);
-    text-decoration:none;
+  .dots{display:flex;gap:7px}
+  .dots i{width:12px;height:12px;border-radius:50%;display:block}
+  .dots i:nth-child(1){background:#ED6A5E}.dots i:nth-child(2){background:#F4BF4F}.dots i:nth-child(3){background:#61C554}
+  .bar .tt{flex:1;text-align:center;color:var(--dim);font-size:12.5px;letter-spacing:.02em}
+  .bar .tglt{background:transparent;border:1px solid var(--border);color:var(--dim);
+    font-family:var(--mono);font-size:11px;border-radius:6px;padding:3px 8px;cursor:pointer;letter-spacing:.05em}
+  .bar .tglt:hover{color:var(--fg);border-color:var(--amber)}
+
+  .screen{flex:1 1 auto;overflow-y:auto;padding:18px 18px 6px;cursor:text;scrollbar-width:thin;
+    scrollbar-color:var(--dimmer) transparent;position:relative}
+  .screen::-webkit-scrollbar{width:9px}
+  .screen::-webkit-scrollbar-thumb{background:var(--dimmer);border-radius:20px}
+  .screen::-webkit-scrollbar-track{background:transparent}
+
+  .line{white-space:pre-wrap;word-break:break-word}
+  .out{margin:2px 0 10px}
+  .anim{animation:fin .18s ease both}
+  @keyframes fin{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}
+
+  .ps1{color:var(--amber);font-weight:600}
+  .ps1 .u{color:var(--green)}
+  .ps1 .path{color:var(--cyan)}
+  .k{color:var(--amber);font-weight:600}
+  .p{color:var(--cyan)}
+  a.p{text-decoration:none;border-bottom:1px solid transparent}
+  a.p:hover{border-color:var(--cyan)}
+  .ok{color:var(--green)}
+  .err{color:var(--red)}
+  .dim{color:var(--dim)}
+  .h{color:var(--amber2);font-weight:700}
+  .val{color:var(--amber);font-weight:600;font-variant-numeric:tabular-nums}
+  .vi{color:var(--violet)}
+  .tag{color:var(--dim)}
+  b{color:var(--fg);font-weight:600}
+
+  .cmdline{display:flex;gap:0;align-items:baseline;padding-bottom:20px}
+  .cmdline .ps1{flex:0 0 auto;margin-right:8px;white-space:nowrap}
+  .typed{white-space:pre-wrap;word-break:break-word}
+  .caret{display:inline-block;width:8.5px;height:1.05em;background:var(--amber);
+    transform:translateY(2px);margin-left:1px;animation:blink 1.05s step-end infinite}
+  .caret.hide{opacity:0;animation:none}
+  @keyframes blink{50%{opacity:0}}
+
+  #cap{position:fixed;bottom:0;left:0;width:1px;height:1px;opacity:0;border:0;padding:0;
+    background:transparent;color:transparent;font-size:16px}
+
+  .chips{flex:0 0 auto;display:flex;gap:8px;flex-wrap:wrap;padding:11px 14px;
+    background:var(--bar);border-top:1px solid var(--border)}
+  .chips button{font-family:var(--mono);font-size:11.5px;color:var(--dim);background:transparent;
+    border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;transition:.15s}
+  .chips button:hover{color:var(--amber);border-color:var(--amber)}
+  .chips .lead{color:var(--dimmer);align-self:center;padding-right:2px;letter-spacing:.05em}
+
+  .banner{color:var(--amber);line-height:1.15;font-size:clamp(11px,2.4vw,15px)}
+  .amberlogo{color:var(--amber);font-weight:600}
+  .scrollx{overflow-x:auto;scrollbar-width:none}
+  .scrollx::-webkit-scrollbar{display:none}
+
+  table.kv{border-collapse:collapse}
+  table.kv td{padding:1px 14px 1px 0;vertical-align:top}
+  table.kv td.key{color:var(--dim)}
+
+  a.focusable:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .sronly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  @media (prefers-reduced-motion:reduce){
+    .anim{animation:none}.caret{animation:none}
   }
-  .monogram b{color:var(--accent)}
-  .nav-links{display:flex;align-items:center;gap:clamp(12px,2.4vw,28px)}
-  .nav-links a{
-    font-family:var(--mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--muted);text-decoration:none;transition:color .18s;
+  @media (max-width:560px){
+    body{padding:0}
+    .term{height:100vh;height:100dvh;border-radius:0;border:0}
+    .chips .lead{display:none}
   }
-  .nav-links a:hover{color:var(--text)}
-  .nav-links a.hideable{display:none}
-  @media(min-width:680px){.nav-links a.hideable{display:inline}}
-  .toggle{
-    font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
-    background:transparent;border:1px solid var(--border-strong);color:var(--muted);
-    border-radius:6px;padding:.4em .6em;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:.5em;
-  }
-  .toggle:hover{color:var(--text);border-color:var(--accent)}
-  .toggle svg{width:13px;height:13px}
-
-  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-
-  /* ============ HERO ============ */
-  header.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
-  #stream{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.55;pointer-events:none}
-  .hero-inner{position:relative;z-index:1;padding:clamp(56px,11vw,120px) 0 clamp(44px,8vw,80px)}
-  .hero h1{
-    font-size:clamp(2.7rem,8vw,5.4rem);line-height:1.02;letter-spacing:-.03em;
-    font-weight:800;margin:.5rem 0 .2rem;text-wrap:balance;
-  }
-  .hero .lede{
-    font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--muted);max-width:34ch;
-    line-height:1.5;margin:.9rem 0 0;text-wrap:pretty;
-  }
-  .hero .lede b{color:var(--text);font-weight:600}
-
-  .spec{
-    margin-top:clamp(28px,5vw,44px);border:1px solid var(--border);border-radius:12px;
-    background:color-mix(in srgb,var(--bg-3) 70%,transparent);backdrop-filter:blur(4px);
-    overflow:hidden;max-width:560px;
-  }
-  .spec-row{display:grid;grid-template-columns:88px 1fr;gap:0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.82rem}
-  .spec-row:last-child{border-bottom:0}
-  .spec-row dt{padding:.7em .9em;color:var(--faint);letter-spacing:.14em;text-transform:uppercase;font-size:.68rem;background:color-mix(in srgb,var(--bg-2) 60%,transparent);border-right:1px solid var(--border);display:flex;align-items:center}
-  .spec-row dd{padding:.7em .9em;margin:0;color:var(--text)}
-  .spec-row dd .hl{color:var(--accent)}
-
-  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(26px,4vw,36px)}
-  .btn{
-    font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;text-decoration:none;
-    padding:.7em 1.1em;border-radius:8px;transition:transform .16s,box-shadow .16s,border-color .16s;
-    display:inline-flex;align-items:center;gap:.6em;
-  }
-  .btn-primary{background:var(--accent-fill);color:var(--accent-ink);font-weight:600}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 22px color-mix(in srgb,var(--accent-fill) 45%,transparent)}
-  .btn-ghost{border:1px solid var(--border-strong);color:var(--text)}
-  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-
-  /* ============ SECTIONS ============ */
-  section{padding:clamp(52px,9vw,96px) 0;border-bottom:1px solid var(--border)}
-  .sec-head{margin-bottom:clamp(28px,5vw,48px)}
-  .sec-head h2{font-size:clamp(1.5rem,3.6vw,2.2rem);letter-spacing:-.02em;font-weight:750;margin:.5rem 0 0;text-wrap:balance}
-  .sec-head p{color:var(--muted);margin:.7rem 0 0;max-width:60ch}
-
-  /* ABOUT */
-  .about-grid{display:grid;gap:clamp(28px,5vw,56px);grid-template-columns:1fr}
-  @media(min-width:820px){.about-grid{grid-template-columns:1.5fr 1fr}}
-  .about-body p{font-size:1.06rem;color:var(--text);max-width:62ch;margin:0 0 1.1em}
-  .about-body p .accent{color:var(--accent);font-weight:600}
-  .impact{display:flex;flex-direction:column;gap:14px}
-  .impact .stat{border:1px solid var(--border);border-radius:10px;padding:16px 18px;background:var(--bg-2)}
-  .impact .num{font-family:var(--mono);font-size:1.7rem;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-  .impact .cap{font-size:.86rem;color:var(--muted);margin-top:.2em;line-height:1.4}
-
-  /* EXPERIENCE */
-  .xp{display:grid;grid-template-columns:1fr;gap:0}
-  .job{display:grid;grid-template-columns:1fr;gap:.4em;padding:clamp(22px,3.5vw,30px) 0;border-top:1px solid var(--border)}
-  .job:first-child{border-top:0;padding-top:0}
-  @media(min-width:760px){.job{grid-template-columns:150px 1fr;gap:28px}}
-  .job-meta{font-family:var(--mono);font-size:.78rem;color:var(--faint);letter-spacing:.03em;line-height:1.7}
-  .job-meta .yr{color:var(--accent);display:block}
-  .job-title{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5em .8em;margin-bottom:.2em}
-  .job-title h3{font-size:1.2rem;font-weight:700;margin:0;letter-spacing:-.01em}
-  .job-title .co{font-family:var(--mono);font-size:.82rem;color:var(--accent);font-weight:600}
-  .job-title .loc{font-family:var(--mono);font-size:.74rem;color:var(--faint);margin-left:auto}
-  .job ul{list-style:none;margin:.7em 0 0;padding:0;display:flex;flex-direction:column;gap:.55em}
-  .job ul li{position:relative;padding-left:1.3em;color:var(--muted);font-size:.98rem;line-height:1.55;max-width:66ch}
-  .job ul li::before{content:"\25B9";position:absolute;left:0;color:var(--accent);font-size:.9em;top:.1em}
-  .job ul li b{color:var(--text);font-weight:600}
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:.9em}
-  .tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.02em;color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:.28em .55em;background:var(--bg-2)}
-
-  /* PROJECTS */
-  .proj-grid{display:grid;grid-template-columns:1fr;gap:18px}
-  @media(min-width:760px){.proj-grid{grid-template-columns:1fr 1fr}}
-  .card{
-    border:1px solid var(--border);border-radius:14px;background:var(--bg-3);
-    padding:clamp(20px,3vw,28px);display:flex;flex-direction:column;gap:.6em;
-    transition:transform .18s,border-color .18s,box-shadow .18s;position:relative;
-  }
-  .card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:var(--shadow)}
-  .card.feature{grid-column:1/-1}
-  @media(min-width:760px){.card.feature{grid-column:auto}}
-  .card .idx{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
-  .card h3{font-size:1.22rem;font-weight:730;margin:.1em 0 0;letter-spacing:-.01em;line-height:1.2}
-  .card .co-note{font-family:var(--mono);font-size:.74rem;color:var(--accent)}
-  .card p{color:var(--muted);font-size:.96rem;line-height:1.55;margin:.3em 0 0;flex:1}
-  .card p b{color:var(--text);font-weight:600}
-  .card .metrics{display:flex;flex-wrap:wrap;gap:14px;margin:.6em 0 .2em}
-  .card .metrics .m{font-family:var(--mono);font-size:.78rem;color:var(--text)}
-  .card .metrics .m span{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums}
-  .card-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:.7em;flex-wrap:wrap}
-  .repo-link{font-family:var(--mono);font-size:.76rem;color:var(--text);text-decoration:none;display:inline-flex;align-items:center;gap:.5em;border-bottom:1px solid transparent;transition:color .16s,border-color .16s}
-  .repo-link svg{width:15px;height:15px;fill:currentColor}
-  .repo-link:hover{color:var(--accent);border-color:var(--accent)}
-  .repo-link.muted{color:var(--faint);cursor:default}
-  .repo-link.muted:hover{color:var(--faint);border-color:transparent}
-
-  .more-repos{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
-  @media(min-width:640px){.more-repos{grid-template-columns:1fr 1fr 1fr}}
-  .repo{border:1px solid var(--border);border-radius:10px;padding:15px 17px;background:var(--bg-2);text-decoration:none;color:var(--text);transition:border-color .16s,transform .16s;display:flex;flex-direction:column;gap:.3em}
-  .repo:hover{border-color:var(--accent);transform:translateY(-2px)}
-  .repo .rn{font-family:var(--mono);font-size:.82rem;font-weight:600;color:var(--accent);word-break:break-word}
-  .repo .rd{font-size:.82rem;color:var(--muted);line-height:1.45}
-  .repo .rl{font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.05em;text-transform:uppercase}
-
-  /* SKILLS */
-  .skills{display:grid;grid-template-columns:1fr;gap:20px}
-  @media(min-width:700px){.skills{grid-template-columns:1fr 1fr}}
-  .skillset{border:1px solid var(--border);border-radius:12px;padding:20px 22px;background:var(--bg-2)}
-  .skillset .st{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
-  .chips{display:flex;flex-wrap:wrap;gap:7px}
-  .chip{font-family:var(--mono);font-size:.78rem;color:var(--text);border:1px solid var(--border-strong);border-radius:6px;padding:.34em .6em;background:var(--bg-3);transition:border-color .16s,color .16s}
-  .chip:hover{border-color:var(--accent);color:var(--accent)}
-
-  /* ACHIEVEMENTS */
-  .stat-tiles{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:30px}
-  @media(min-width:560px){.stat-tiles{grid-template-columns:1fr 1fr 1fr}}
-  .tile{border:1px solid var(--border);border-radius:12px;padding:20px 22px;background:var(--bg-3);position:relative;overflow:hidden}
-  .tile::after{content:"";position:absolute;right:-20px;top:-20px;width:70px;height:70px;background:radial-gradient(circle,var(--accent-soft),transparent 70%)}
-  .tile .tn{font-family:var(--mono);font-size:2.1rem;font-weight:750;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
-  .tile .tl{font-size:.9rem;color:var(--text);margin-top:.5em;font-weight:600}
-  .tile .ts{font-size:.8rem;color:var(--muted);margin-top:.15em}
-  .ach-list{display:flex;flex-direction:column;gap:16px}
-  .ach{display:grid;grid-template-columns:1fr;gap:.2em;padding-left:1.2em;position:relative}
-  .ach::before{content:"\25C6";position:absolute;left:0;color:var(--accent);font-size:.7em;top:.35em}
-  .ach .ah{font-weight:650;font-size:1rem}
-  .ach .ab{color:var(--muted);font-size:.95rem;line-height:1.55;max-width:70ch}
-  .ach .ab b{color:var(--text);font-weight:600}
-
-  /* EDUCATION + CONTACT */
-  .edu{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5em 1em;border:1px solid var(--border);border-radius:12px;padding:22px 24px;background:var(--bg-2)}
-  .edu h3{margin:0;font-size:1.15rem;font-weight:700}
-  .edu .deg{color:var(--muted);font-size:.98rem}
-  .edu .em{font-family:var(--mono);font-size:.8rem;color:var(--accent);margin-left:auto}
-  .edu .cpi{font-family:var(--mono);font-size:.8rem;color:var(--text);border:1px solid var(--border-strong);border-radius:6px;padding:.25em .55em}
-
-  footer{padding:clamp(56px,10vw,110px) 0 60px}
-  .contact-h{font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-.03em;text-wrap:balance;margin:.4rem 0 0}
-  .contact-h a{color:var(--accent);text-decoration:none;border-bottom:2px solid transparent;transition:border-color .16s}
-  .contact-h a:hover{border-color:var(--accent)}
-  .contact-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:34px;max-width:620px}
-  @media(min-width:560px){.contact-grid{grid-template-columns:1fr 1fr}}
-  .contact-grid a,.contact-grid span{
-    font-family:var(--mono);font-size:.84rem;color:var(--text);text-decoration:none;
-    border:1px solid var(--border);border-radius:9px;padding:14px 16px;background:var(--bg-2);
-    display:flex;align-items:center;gap:.7em;transition:border-color .16s,transform .16s;
-  }
-  .contact-grid a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-  .contact-grid .k{color:var(--faint);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase}
-  .foot-meta{margin-top:48px;font-family:var(--mono);font-size:.72rem;color:var(--faint);letter-spacing:.04em;display:flex;flex-wrap:wrap;gap:.4em 1.2em;justify-content:space-between;border-top:1px solid var(--border);padding-top:22px}
 </style>
 
-<nav>
-  <div class="wrap nav-inner">
-    <a href="#top" class="monogram">Y<b>T</b></a>
-    <div class="nav-links">
-      <a href="#about" class="hideable">About</a>
-      <a href="#experience" class="hideable">Experience</a>
-      <a href="#projects" class="hideable">Projects</a>
-      <a href="#skills" class="hideable">Skills</a>
-      <a href="#contact" class="hideable">Contact</a>
-      <button class="toggle" id="themeBtn" aria-label="Toggle color theme">
-        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
-        <span id="themeLabel">Dark</span>
-      </button>
+<div class="term" id="term">
+  <div class="bar">
+    <span class="dots"><i></i><i></i><i></i></span>
+    <span class="tt">yash@portfolio — zsh</span>
+    <button class="tglt" id="tgl" aria-label="Toggle theme">THEME</button>
+  </div>
+  <div class="screen" id="screen">
+    <div id="output"></div>
+    <div class="cmdline" id="cmdline">
+      <span class="ps1"><span class="u">yash</span>@portfolio<span class="path">:~</span>$</span>
+      <span class="typed" id="typed"></span><span class="caret" id="caret"></span>
     </div>
   </div>
-</nav>
-
-<header class="hero" id="top">
-  <canvas id="stream" aria-hidden="true"></canvas>
-  <div class="wrap hero-inner">
-    <span class="label">Software Engineer &#183; Bengaluru, India</span>
-    <h1>Yash Tewari</h1>
-    <p class="lede">I build the backend that moves money &#8212; <b>Kotlin &amp; Java microservices</b>, <b>Kafka event streams</b>, and <b>data pipelines</b> behind a live lending platform.</p>
-
-    <dl class="spec">
-      <div class="spec-row"><dt>Role</dt><dd><span class="hl">SDE I</span> &#183; Loans Team, Jupiter Money</dd></div>
-      <div class="spec-row"><dt>Focus</dt><dd>Backend &#183; Distributed Systems &#183; Generative AI</dd></div>
-      <div class="spec-row"><dt>Stack</dt><dd>Java &#183; Kotlin &#183; Python &#183; Spring Boot &#183; Kafka &#183; AWS</dd></div>
-      <div class="spec-row"><dt>Edu</dt><dd>B.Tech, IIT Roorkee &#183; <span class="hl">CPI 9.04 / 10</span></dd></div>
-    </dl>
-
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#projects">View Projects</a>
-      <a class="btn btn-ghost" href="https://github.com/dranxer" target="_blank" rel="noopener">GitHub &#8599;</a>
-      <a class="btn btn-ghost" href="mailto:ytewari91@gmail.com">Email &#8599;</a>
-    </div>
+  <div class="chips" id="chips">
+    <span class="lead">try:</span>
   </div>
-</header>
+  <input id="cap" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Terminal command input">
+</div>
 
-<main class="wrap">
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="sec-head"><span class="label">About</span><h2>Systems that stay up when it counts.</h2></div>
-    <div class="about-grid">
-      <div class="about-body">
-        <p>I'm a software engineer and <span class="accent">IIT Roorkee 2026 graduate</span> working across fintech and applied AI. Today I build backend services on Jupiter Money's <span class="accent">credit-card lending platform</span> &#8212; Kotlin and Java microservices, Kafka-driven event flows, and Databricks ingestion feeding the analytics lakehouse.</p>
-        <p>Before Jupiter I shipped production systems at <b>Standard Chartered Bank</b> and an AI startup, and I'm equally at home fine-tuning transformers, standing up RAG pipelines, or grinding competitive algorithms. I care about resilient design, measurable outcomes, and code that reads like the team wrote it.</p>
-      </div>
-      <div class="impact">
-        <div class="stat"><div class="num">100%</div><div class="cap">of manual payroll payment overhead eliminated via a GenAI + Wise API pipeline</div></div>
-        <div class="stat"><div class="num">40%</div><div class="cap">lower document-search latency on a LangChain + FAISS RAG pipeline</div></div>
-        <div class="stat"><div class="num">30%</div><div class="cap">gain in ETL team efficiency after refactoring validation &amp; SQL</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="sec-head"><span class="label">Experience</span><h2>Where I've shipped.</h2></div>
-    <div class="xp">
-
-      <article class="job">
-        <div class="job-meta"><span class="yr">Jun 2026 &#8212;</span>Present<br><span style="color:var(--faint)">Full-time</span></div>
-        <div>
-          <div class="job-title"><h3>Software Development Engineer I</h3><span class="co">Jupiter Money</span><span class="loc">Bengaluru</span></div>
-          <ul>
-            <li>Build and maintain <b>Kotlin &amp; Java microservices</b> powering 3 core lending workflows on the Loans platform &#8212; origination (LOS), account servicing, and repayment processing.</li>
-            <li>Architect event-driven communication using <b>Kafka topics</b>, streaming loan-lifecycle events asynchronously to keep producers and consumers decoupled and resilient under load.</li>
-            <li>Model loan &amp; transaction data across <b>SQL and DynamoDB</b>, and build <b>Databricks</b> ingestion pipelines that land production data into the analytics lakehouse.</li>
-          </ul>
-          <div class="tags"><span class="tag">Kotlin</span><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Kafka</span><span class="tag">DynamoDB</span><span class="tag">Databricks</span><span class="tag">SQL</span></div>
-        </div>
-      </article>
-
-      <article class="job">
-        <div class="job-meta"><span class="yr">Jan 2026 &#8212;</span>May 2026<br><span style="color:var(--faint)">Remote</span></div>
-        <div>
-          <div class="job-title"><h3>Junior AI Engineer</h3><span class="co">797th LLC</span><span class="loc">Remote</span></div>
-          <ul>
-            <li>Deployed <b>8 microservices</b> in Python/FastAPI, Node.js/TypeScript, and Next.js on a self-managed <b>Kubernetes</b> cluster, wiring together PostgreSQL, Redis, MinIO, and Traefik.</li>
-            <li>Streamlined payroll processing by linking <b>Generative AI/LLM pipelines</b> to the Wise API, eliminating <b>100%</b> of manual payment overhead for a distributed remote team.</li>
-          </ul>
-          <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">Kubernetes</span><span class="tag">LLMs</span></div>
-        </div>
-      </article>
-
-      <article class="job">
-        <div class="job-meta"><span class="yr">May 2025 &#8212;</span>Jul 2025<br><span style="color:var(--faint)">Internship</span></div>
-        <div>
-          <div class="job-title"><h3>Software Engineering Intern</h3><span class="co">Standard Chartered Bank</span><span class="loc">Bengaluru</span></div>
-          <ul>
-            <li>Developed Python &amp; SQL backend modules for a real-time financial-data <b>ETL pipeline</b>, preserving <b>100% data integrity</b> across 10,000+ daily transaction records.</li>
-            <li>Refactored validation scripts and SQL queries, trimming execution runtime by <b>25%</b> and raising team operational efficiency by <b>30%</b>.</li>
-          </ul>
-          <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">ETL</span><span class="tag">Data Integrity</span></div>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="sec-head"><span class="label">Selected Work</span><h2>Projects.</h2><p>Featured builds spanning deep learning, retrieval-augmented AI, and full-stack systems. Live source on GitHub where available.</p></div>
-
-    <div class="proj-grid">
-
-      <article class="card feature">
-        <span class="idx">Deep Learning &#183; Award</span>
-        <h3>Low-Light Image Enhancement</h3>
-        <p>Extended the <b>MIRNet</b> deep CNN with <b>self-attention</b> for long-range spatial dependency modeling in degraded images, then optimized the TensorFlow training pipeline to beat published baselines.</p>
-        <div class="metrics"><div class="m">PSNR <span>62.23</span></div><div class="m">Hackathon <span>1st / 50+</span></div></div>
-        <div class="card-foot">
-          <div class="tags"><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">CNNs</span><span class="tag">Self-Attention</span></div>
-          <a class="repo-link" href="https://github.com/dranxer/low-light-image-enhancement" target="_blank" rel="noopener"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>low-light-enhancement</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <span class="idx">Applied AI &#183; RAG</span>
-        <h3>PDF Question-Answering System</h3>
-        <p>Fine-tuned a <b>BERT</b> model on SQuAD for extractive QA, then wrapped it in a <b>Retrieval-Augmented Generation</b> pipeline combining LangChain and a FAISS vector store, served over FastAPI.</p>
-        <div class="metrics"><div class="m">Accuracy <span>+18%</span></div><div class="m">Latency <span>&#8722;40%</span></div><div class="m">Hallucination <span>&#8722;25%</span></div></div>
-        <div class="card-foot">
-          <div class="tags"><span class="tag">BERT</span><span class="tag">LangChain</span><span class="tag">FAISS</span><span class="tag">FastAPI</span></div>
-          <a class="repo-link" href="https://github.com/dranxer/pdf-qa-rag" target="_blank" rel="noopener"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>pdf-qa-rag</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <span class="idx">Full-Stack &#183; Local LLM</span>
-        <h3>Full-Stack Content Dashboard</h3>
-        <p>A 3-tier reading dashboard &#8212; <b>React</b> front end, <b>Node.js/PostgreSQL</b> API with Prisma ORM and JWT auth, plus a custom <b>Chrome extension</b> for persistent highlights and notes. Summaries run on a local <b>LLaMA</b> Flask backend.</p>
-        <div class="metrics"><div class="m">Cloud inference cost <span>&#8722;100%</span></div></div>
-        <div class="card-foot">
-          <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">LLaMA</span><span class="tag">JWT</span></div>
-          <a class="repo-link" href="https://github.com/dranxer/Web-Annotator-Project" target="_blank" rel="noopener"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Web-Annotator</a>
-        </div>
-      </article>
-
-    </div>
-
-    <div class="sec-head" style="margin-top:44px;margin-bottom:18px"><span class="label">More on GitHub</span></div>
-    <div class="more-repos">
-      <a class="repo" href="https://github.com/dranxer/FLASK-SOCIAL-MEDIA-NETWORK" target="_blank" rel="noopener"><span class="rn">Flask Social Network</span><span class="rd">A social-media app built on Flask with feeds, auth, and profiles.</span><span class="rl">Python &#183; Flask</span></a>
-      <a class="repo" href="https://github.com/dranxer/CSES-DP-SOLUTIONS" target="_blank" rel="noopener"><span class="rn">Algorithms &amp; DSA</span><span class="rd">Curated solutions &#8212; CSES DP set, SPOJ Classical, and full LeetCode archive.</span><span class="rl">C++ &#183; Competitive</span></a>
-      <a class="repo" href="https://github.com/dranxer/Particle-Detection" target="_blank" rel="noopener"><span class="rn">Particle Detection</span><span class="rd">Computer-vision experiments in particle detection and tracking.</span><span class="rl">Python &#183; CV</span></a>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="sec-head"><span class="label">Toolbox</span><h2>Technical skills.</h2></div>
-    <div class="skills">
-      <div class="skillset"><div class="st">Languages</div><div class="chips"><span class="chip">Java</span><span class="chip">Kotlin</span><span class="chip">Python</span><span class="chip">C++</span><span class="chip">SQL</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span></div></div>
-      <div class="skillset"><div class="st">Backend</div><div class="chips"><span class="chip">Spring Boot</span><span class="chip">FastAPI</span><span class="chip">Node.js</span><span class="chip">Flask</span><span class="chip">REST APIs</span><span class="chip">Microservices</span><span class="chip">Event-Driven Arch</span><span class="chip">Redis</span></div></div>
-      <div class="skillset"><div class="st">Data &amp; Streaming</div><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">DynamoDB</span><span class="chip">Databricks</span><span class="chip">Kafka</span><span class="chip">ETL / ELT</span><span class="chip">Ingestion Pipelines</span></div></div>
-      <div class="skillset"><div class="st">Cloud &amp; DevOps</div><div class="chips"><span class="chip">AWS (EC2/S3/RDS)</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Traefik</span><span class="chip">MinIO</span><span class="chip">CI/CD</span></div></div>
-      <div class="skillset"><div class="st">AI / ML</div><div class="chips"><span class="chip">Generative AI</span><span class="chip">LLMs</span><span class="chip">RAG</span><span class="chip">LangChain</span><span class="chip">Hugging Face</span><span class="chip">FAISS</span><span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">BERT</span></div></div>
-      <div class="skillset"><div class="st">Foundations</div><div class="chips"><span class="chip">DSA</span><span class="chip">System Design</span><span class="chip">OOP</span><span class="chip">Unit Testing</span><span class="chip">PyTest</span><span class="chip">JUnit</span><span class="chip">Agile / Scrum</span></div></div>
-    </div>
-  </section>
-
-  <!-- ACHIEVEMENTS -->
-  <section id="achievements">
-    <div class="sec-head"><span class="label">Track Record</span><h2>Achievements &amp; leadership.</h2></div>
-    <div class="stat-tiles">
-      <div class="tile"><div class="tn">1525</div><div class="tl">Codeforces Specialist</div><div class="ts">Competitive rating</div></div>
-      <div class="tile"><div class="tn">1774</div><div class="tl">LeetCode Rating</div><div class="ts">Top 8% globally</div></div>
-      <div class="tile"><div class="tn">1794</div><div class="tl">JEE Mains 2022 &#183; AIR</div><div class="ts">Top 0.15% of 1.2M</div></div>
-    </div>
-    <div class="ach-list">
-      <div class="ach"><div class="ah">Hackathon Wins</div><div class="ab"><b>Winner</b>, IIT Roorkee Departmental Hackathon 2024 (50+ teams) &#183; <b>1st Place</b>, Cyanide Hackathon, Panjab University (100+ teams).</div></div>
-      <div class="ach"><div class="ah">Mentorship &amp; Teaching</div><div class="ab">Mentored <b>120+ students</b> in Engineering Mathematics as an Undergraduate Teaching Assistant (UGTA), driving a <b>15%</b> lift in average class scores.</div></div>
-      <div class="ach"><div class="ah">Community Leadership</div><div class="ab">Spearheaded Python &amp; Data Structures workshops for <b>150+ students</b> as ChESS Technical Lead, growing workshop turnout by <b>40%</b>.</div></div>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="sec-head"><span class="label">Education</span><h2>Foundations.</h2></div>
-    <div class="edu">
-      <h3>Indian Institute of Technology Roorkee</h3>
-      <span class="cpi">CPI 9.043 / 10</span>
-      <span class="deg">Bachelor of Technology</span>
-      <span class="em">Jul 2022 &#8212; Jun 2026 &#183; Roorkee, India</span>
-    </div>
-  </section>
-
-</main>
-
-<footer class="wrap" id="contact">
-  <span class="label">Get in touch</span>
-  <p class="contact-h">Let's build something.<br>Reach me at <a href="mailto:ytewari91@gmail.com">ytewari91@gmail.com</a></p>
-  <div class="contact-grid">
-    <a href="mailto:ytewari91@gmail.com"><span class="k">Email</span>ytewari91@gmail.com</a>
-    <a href="tel:+918218170774"><span class="k">Phone</span>+91 82181 70774</a>
-    <a href="https://linkedin.com/in/yash-tewari-959833252" target="_blank" rel="noopener"><span class="k">LinkedIn</span>/in/yash-tewari</a>
-    <a href="https://github.com/dranxer" target="_blank" rel="noopener"><span class="k">GitHub</span>github.com/dranxer</a>
-  </div>
-  <div class="foot-meta"><span>Yash Tewari &#183; Software Engineer</span><span>Bengaluru, India</span></div>
-</footer>
+<!-- Fallback content for search engines & no-JS / screen readers -->
+<div class="sronly">
+  <h1>Yash Tewari — Software Engineer</h1>
+  <p>Backend, distributed systems and Generative AI engineer at Jupiter Money (Loans team),
+  Bengaluru. IIT Roorkee 2026, CPI 9.043/10. Skills: Java, Kotlin, Python, Spring Boot, Kafka,
+  DynamoDB, Databricks, AWS, FastAPI, LangChain, RAG. Email ytewari91@gmail.com.
+  GitHub github.com/dranxer. LinkedIn linkedin.com/in/yash-tewari-959833252.</p>
+</div>
 
 <script>
 (function(){
-  var root=document.documentElement, btn=document.getElementById('themeBtn'),
-      label=document.getElementById('themeLabel'), icon=document.getElementById('themeIcon');
-  var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
-  var moon='<path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"></path>';
-  function current(){
-    var attr=root.getAttribute('data-theme');
-    if(attr) return attr;
-    return window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
-  }
-  function apply(mode){
-    root.setAttribute('data-theme',mode);
-    var dark=mode==='dark';
-    label.textContent=dark?'Light':'Dark';
-    icon.innerHTML=dark?sun:moon;
-  }
-  apply(current());
-  btn.addEventListener('click',function(){apply(current()==='dark'?'light':'dark');});
+  "use strict";
+  var root=document.documentElement, output=document.getElementById('output'),
+      screenEl=document.getElementById('screen'), cmdline=document.getElementById('cmdline'),
+      typed=document.getElementById('typed'), caret=document.getElementById('caret'),
+      cap=document.getElementById('cap'), chipsBar=document.getElementById('chips');
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var history=[], hIdx=0, booting=true;
 
-  // Ambient event-stream canvas (Kafka nod). Static-friendly + reduced-motion aware.
-  var c=document.getElementById('stream'), ctx=c&&c.getContext('2d');
-  if(c&&ctx){
-    var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    var W,H,dots=[],lanes=[];
-    function accent(){return getComputedStyle(root).getPropertyValue('--accent-fill').trim()||'#E9A23B';}
-    function resize(){
-      var r=c.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
-      W=r.width;H=r.height;c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-      var n=Math.max(4,Math.round(H/70));lanes=[];
-      for(var i=0;i<n;i++){lanes.push((i+.5)*(H/n)+(Math.random()*10-5));}
-      dots=[];
-      var count=reduce?lanes.length*3:Math.round(W/22);
-      for(var j=0;j<count;j++){
-        dots.push({y:lanes[j%lanes.length],x:Math.random()*W,
-          s:.25+Math.random()*.55,r:Math.random()<.12?2:1,o:.15+Math.random()*.5});
-      }
+  // ---------- theme ----------
+  function curTheme(){ return root.getAttribute('data-theme') ||
+    (window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark'); }
+  document.getElementById('tgl').addEventListener('click',function(){
+    root.setAttribute('data-theme', curTheme()==='dark'?'light':'dark'); focusCap();
+  });
+
+  // ---------- helpers ----------
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function el(html, cls){ var d=document.createElement('div'); d.className='line '+(cls||'')+(reduce?'':' anim'); d.innerHTML=html; return d; }
+  function print(html, cls){ output.appendChild(el(html, cls)); scroll(); }
+  function printOut(html){ print(html,'out'); }
+  function scroll(){ screenEl.scrollTop=screenEl.scrollHeight; }
+  function ps1(){ return '<span class="ps1"><span class="u">yash</span>@portfolio<span class="path">:~</span>$</span> '; }
+  function echoCmd(c){ print(ps1()+esc(c)); }
+
+  // ---------- command registry ----------
+  var CMD={};
+  function def(name, desc, fn){ CMD[name]={desc:desc, fn:fn}; }
+
+  def('help','list available commands', function(){
+    var order=['about','whoami','experience','projects','skills','achievements','education',
+               'contact','resume','neofetch','tour','theme','clear'];
+    var rows=order.map(function(n){
+      return '  <span class="k">'+n.padEnd(13)+'</span><span class="dim">'+CMD[n].desc+'</span>';
+    }).join('\n');
+    return '<span class="dim">Commands — type one and hit Enter (Tab autocompletes):</span>\n\n'+rows+
+      '\n\n<span class="dim">Also: </span><span class="p">open &lt;project&gt;</span>'+
+      '<span class="dim">, </span><span class="p">github</span><span class="dim">, </span>'+
+      '<span class="p">linkedin</span><span class="dim">, </span><span class="p">ls</span>'+
+      '<span class="dim">, </span><span class="p">history</span><span class="dim">. New here? run </span><span class="k">tour</span><span class="dim">.</span>';
+  });
+
+  def('whoami','the one-line version', function(){
+    return '<b>Yash Tewari</b> <span class="dim">·</span> Software Engineer <span class="dim">·</span> '+
+      'Backend, Distributed Systems &amp; Generative AI <span class="dim">·</span> Bengaluru, India';
+  });
+
+  def('about','who I am & what I care about', function(){
+    return '<span class="h">// about</span>\n'+
+    'Software engineer and <span class="k">IIT Roorkee 2026</span> graduate (CPI 9.043/10) working across\n'+
+    'fintech and applied AI. Today I build backend services on <b>Jupiter Money</b>\'s credit-card\n'+
+    'lending platform — <span class="k">Kotlin</span> &amp; <span class="k">Java</span> microservices, <span class="k">Kafka</span>-driven event flows, and\n'+
+    '<span class="k">Databricks</span> ingestion feeding the analytics lakehouse.\n\n'+
+    'Before Jupiter I shipped production systems at <b>Standard Chartered Bank</b> and an AI\n'+
+    'startup. I like resilient design, measurable outcomes, and code that reads like the\n'+
+    'team wrote it. Off the clock: competitive programming (<span class="k">Codeforces Specialist</span>).';
+  });
+
+  def('experience','roles & what I did (cat experience/*)', function(){
+    return '<span class="h">// experience</span>\n\n'+
+    '<span class="k">Jupiter Money</span>  <span class="dim">— SDE I, Loans Team · Bengaluru · Jun 2026–present</span>\n'+
+    '  <span class="ok">▹</span> Build &amp; maintain <b>Kotlin/Java</b> microservices powering 3 core lending\n'+
+    '    workflows: origination (LOS), account servicing, repayment.\n'+
+    '  <span class="ok">▹</span> Architect event-driven comms over <b>Kafka topics</b> — decoupled, resilient\n'+
+    '    loan-lifecycle streaming under load.\n'+
+    '  <span class="ok">▹</span> Model data across <b>SQL</b> &amp; <b>DynamoDB</b>; build <b>Databricks</b> ingestion into the\n'+
+    '    analytics lakehouse.\n\n'+
+    '<span class="k">797th LLC</span>      <span class="dim">— Junior AI Engineer · Remote · Jan–May 2026</span>\n'+
+    '  <span class="ok">▹</span> Deployed <span class="val">8</span> microservices (FastAPI, Node/TS, Next.js) on self-managed\n'+
+    '    <b>Kubernetes</b> — Postgres, Redis, MinIO, Traefik.\n'+
+    '  <span class="ok">▹</span> Linked <b>GenAI/LLM</b> pipelines to the Wise API — <span class="val">−100%</span> manual payment overhead.\n\n'+
+    '<span class="k">Standard Chartered</span> <span class="dim">— SWE Intern · Bengaluru · May–Jul 2025</span>\n'+
+    '  <span class="ok">▹</span> Built Python/SQL modules for a real-time financial ETL pipeline —\n'+
+    '    <span class="val">100%</span> data integrity across <span class="val">10,000+</span> daily records.\n'+
+    '  <span class="ok">▹</span> Refactored validation &amp; SQL — <span class="val">−25%</span> runtime, <span class="val">+30%</span> team efficiency.';
+  });
+
+  var PROJECTS={
+    'low-light':{title:'Low-Light Image Enhancement', repo:'low-light-image-enhancement',
+      tech:'Python · TensorFlow · CNNs · Self-Attention',
+      body:'Extended the <b>MIRNet</b> deep CNN with <b>self-attention</b> for long-range spatial\n'+
+           'dependency modeling in degraded images; optimized the TF training pipeline to\n'+
+           'beat baselines. <span class="val">PSNR ~62</span> · <span class="ok">1st place</span>, IIT Roorkee Hackathon 2024 (50+ teams).'},
+    'pdf-qa':{title:'PDF Question-Answering System', repo:'pdf-qa-rag',
+      tech:'Python · BERT · LangChain · FAISS · FastAPI · RAG',
+      body:'Fine-tuned <b>BERT</b> on SQuAD for extractive QA, wrapped in a <b>RAG</b> pipeline\n'+
+           '(LangChain + FAISS) over FastAPI. <span class="val">+18%</span> accuracy · <span class="val">−40%</span> latency · <span class="val">−25%</span> hallucination.'},
+    'dashboard':{title:'Full-Stack Content Dashboard', repo:'Web-Annotator-Project',
+      tech:'React · Node.js · PostgreSQL · LLaMA · Flask · JWT',
+      body:'3-tier reading dashboard + custom <b>Chrome extension</b> for persistent highlights.\n'+
+           'Summaries run on a local <b>LLaMA</b> Flask backend — <span class="val">−100%</span> cloud inference cost.'}
+  };
+  function repoLink(r){ return '<a class="p focusable" href="https://github.com/dranxer/'+r+'" target="_blank" rel="noopener">github.com/dranxer/'+r+'</a>'; }
+
+  def('projects','list featured projects', function(){
+    var lines=Object.keys(PROJECTS).map(function(id){
+      var p=PROJECTS[id];
+      return '  <span class="k">'+id.padEnd(11)+'</span><b>'+p.title+'</b>\n'+
+             '  '+' '.repeat(11)+'<span class="dim">'+p.tech+'</span>';
+    }).join('\n\n');
+    return '<span class="h">// projects</span>\n\n'+lines+
+      '\n\n<span class="dim">→ run </span><span class="p">open low-light</span><span class="dim"> (or pdf-qa / dashboard) for details.</span>'+
+      '\n<span class="dim">→ more on </span><span class="p">github</span><span class="dim">: competitive-programming archives, Flask apps, and more.</span>';
+  });
+
+  def('open','open a project: open <id>', function(args){
+    var id=(args[0]||'').toLowerCase();
+    var p=PROJECTS[id];
+    if(!p) return '<span class="err">open: unknown project \''+esc(id||'')+'\'</span>\n<span class="dim">try:</span> '+
+      Object.keys(PROJECTS).map(function(k){return '<span class="p">'+k+'</span>';}).join('<span class="dim">, </span>');
+    return '<span class="h">'+p.title+'</span>\n<span class="dim">'+p.tech+'</span>\n\n'+p.body+
+      '\n\n<span class="dim">repo:</span> '+repoLink(p.repo);
+  });
+
+  def('skills','my toolbox', function(){
+    function row(l,v){ return '  <span class="k">'+l.padEnd(11)+'</span><span class="dim">'+v+'</span>'; }
+    return '<span class="h">// skills</span>\n\n'+
+      row('languages','Java, Kotlin, Python, C++, SQL, JavaScript, TypeScript')+'\n'+
+      row('backend','Spring Boot, FastAPI, Node.js, Flask, REST, Microservices, Event-Driven')+'\n'+
+      row('data','PostgreSQL, MySQL, DynamoDB, Databricks, Kafka, ETL/ELT, Pipelines')+'\n'+
+      row('cloud','AWS (EC2/S3/RDS), Docker, Kubernetes, Traefik, MinIO, CI/CD')+'\n'+
+      row('ai/ml','GenAI, LLMs, RAG, LangChain, HuggingFace, FAISS, PyTorch, TensorFlow, BERT')+'\n'+
+      row('cs','DSA, System Design, OOP, Unit Testing (PyTest/JUnit), Agile');
+  });
+
+  def('achievements','the track record', function(){
+    return '<span class="h">// achievements</span>\n\n'+
+    '  <span class="val">1525</span> <span class="dim">Codeforces Specialist</span>       '+
+    '<span class="val">1774</span> <span class="dim">LeetCode (Top 8%)</span>\n'+
+    '  <span class="val">1794</span> <span class="dim">JEE Mains AIR — Top 0.15% of 1.2M applicants</span>\n\n'+
+    '  <span class="ok">★</span> Winner, IIT Roorkee Departmental Hackathon 2024 <span class="dim">(50+ teams)</span>\n'+
+    '  <span class="ok">★</span> 1st place, Cyanide Hackathon, Panjab University <span class="dim">(100+ teams)</span>\n'+
+    '  <span class="ok">★</span> Mentored <span class="val">120+</span> students as UGTA <span class="dim">(+15% avg scores)</span>\n'+
+    '  <span class="ok">★</span> ChESS Technical Lead — workshops for <span class="val">150+</span> students <span class="dim">(+40% turnout)</span>';
+  });
+
+  def('education','where I studied', function(){
+    return '<span class="h">// education</span>\n\n'+
+    '  <b>Indian Institute of Technology Roorkee</b> <span class="dim">(IIT Roorkee)</span>\n'+
+    '  Bachelor of Technology <span class="dim">·</span> <span class="k">CPI 9.043/10</span>\n'+
+    '  <span class="dim">Jul 2022 — Jun 2026 · Roorkee, India</span>';
+  });
+
+  def('contact','how to reach me', function(){
+    return '<span class="h">// contact</span>\n\n'+
+    '  <span class="dim">email   </span><a class="p focusable" href="mailto:ytewari91@gmail.com">ytewari91@gmail.com</a>\n'+
+    '  <span class="dim">phone   </span><a class="p focusable" href="tel:+918218170774">+91 82181 70774</a>\n'+
+    '  <span class="dim">github  </span><a class="p focusable" href="https://github.com/dranxer" target="_blank" rel="noopener">github.com/dranxer</a>\n'+
+    '  <span class="dim">linkedin</span> <a class="p focusable" href="https://linkedin.com/in/yash-tewari-959833252" target="_blank" rel="noopener">linkedin.com/in/yash-tewari-959833252</a>\n\n'+
+    '  <span class="ok">●</span> <span class="dim">open to backend / distributed-systems / AI roles</span>';
+  });
+
+  def('resume','how to get my resume', function(){
+    return '<span class="dim">Ping me for a PDF —</span> <a class="p focusable" href="mailto:ytewari91@gmail.com?subject=Resume%20request">ytewari91@gmail.com</a>'+
+      '<span class="dim"> — or see the full profile on</span> <a class="p focusable" href="https://linkedin.com/in/yash-tewari-959833252" target="_blank" rel="noopener">LinkedIn</a><span class="dim">.</span>';
+  });
+
+  def('neofetch','system info, terminal-style', function(){
+    var logo=
+      ' <span class="amberlogo">__   __ ______</span>\n'+
+      ' <span class="amberlogo">\\ \\ / /|_   _|</span>\n'+
+      ' <span class="amberlogo"> \\ V /   | |</span>\n'+
+      ' <span class="amberlogo">  |_|    |_|</span>\n'+
+      '\n'+
+      ' <span class="dim">software engineer</span>';
+    var info=[
+      '<span class="k">yash</span><span class="dim">@</span><span class="k">portfolio</span>',
+      '<span class="dim">─────────────────────────</span>',
+      '<span class="p">role</span>     Software Engineer',
+      '<span class="p">company</span>  Jupiter Money — Loans',
+      '<span class="p">edu</span>      IIT Roorkee \'26 · CPI 9.04',
+      '<span class="p">lang</span>     Kotlin · Java · Python · C++',
+      '<span class="p">focus</span>    Backend · Distributed · GenAI',
+      '<span class="p">solved</span>   CF 1525 · LC 1774 · JEE AIR 1794',
+      '<span class="p">editor</span>   nvim <span class="dim">(btw)</span>',
+      '<span class="p">contact</span>  ytewari91@gmail.com'
+    ].join('\n');
+    return '<div class="scrollx" style="display:flex;gap:22px;white-space:pre">'+
+      '<div class="banner" style="flex:0 0 auto">'+logo+'</div>'+
+      '<div style="flex:0 0 auto">'+info+'</div></div>';
+  });
+
+  def('ls','list sections', function(){
+    return '<span class="p">about</span>  <span class="p">experience</span>  <span class="p">projects</span>  '+
+           '<span class="p">skills</span>  <span class="p">achievements</span>  <span class="p">education</span>  <span class="p">contact</span>';
+  });
+  def('history','command history', function(){
+    if(!history.length) return '<span class="dim">(empty)</span>';
+    return history.map(function(c,i){return '  <span class="dim">'+String(i+1).padStart(3)+'</span>  '+esc(c);}).join('\n');
+  });
+  def('date','current date', function(){ return new Date().toString(); });
+  def('pwd','print working directory', function(){ return '/home/yash/portfolio'; });
+  def('echo','echo text', function(args){ return esc(args.join(' ')); });
+  def('github','open my GitHub', function(){ openUrl('https://github.com/dranxer'); return '<span class="dim">opening</span> <span class="p">github.com/dranxer</span> <span class="dim">…</span>'; });
+  def('linkedin','open my LinkedIn', function(){ openUrl('https://linkedin.com/in/yash-tewari-959833252'); return '<span class="dim">opening</span> <span class="p">linkedin.com/in/yash-tewari</span> <span class="dim">…</span>'; });
+  def('theme','toggle light / dark', function(){ root.setAttribute('data-theme', curTheme()==='dark'?'light':'dark'); return '<span class="dim">theme →</span> <span class="k">'+curTheme()+'</span>'; });
+  def('clear','clear the screen', function(){ output.innerHTML=''; return null; });
+  def('sudo','', function(){ return '<span class="dim">nice try. this incident will <span class="k">not</span> be reported 😄</span>'; });
+  def('tour','guided walkthrough (great for a first visit)', null); // handled specially
+
+  function openUrl(u){ window.open(u,'_blank','noopener'); }
+
+  // ---------- runner ----------
+  function dispatch(raw){
+    var parts=raw.trim().split(/\s+/), name=parts[0].toLowerCase(), args=parts.slice(1);
+    if(name==='') return '';
+    if(name==='tour'){ startTour(); return undefined; }
+    var c=CMD[name];
+    if(!c || !c.fn){
+      return '<span class="err">command not found: '+esc(name)+'</span> <span class="dim">— type</span> <span class="k">help</span>';
     }
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      var col=accent();
-      for(var i=0;i<lanes.length;i++){
-        ctx.strokeStyle=col;ctx.globalAlpha=.05;ctx.lineWidth=1;
-        ctx.beginPath();ctx.moveTo(0,lanes[i]);ctx.lineTo(W,lanes[i]);ctx.stroke();
-      }
-      for(var k=0;k<dots.length;k++){
-        var d=dots[k];
-        if(!reduce){d.x+=d.s;if(d.x>W+4){d.x=-4;}}
-        ctx.globalAlpha=d.o;ctx.fillStyle=col;
-        ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,6.2832);ctx.fill();
-      }
-      ctx.globalAlpha=1;
-      if(!reduce) raf=requestAnimationFrame(draw);
-    }
-    var raf;
-    function start(){resize();cancelAnimationFrame(raf);draw();}
-    window.addEventListener('resize',function(){clearTimeout(window.__rt);window.__rt=setTimeout(start,150);});
-    start();
+    return c.fn(args);
   }
+  function run(raw){
+    echoCmd(raw);
+    if(raw.trim()){ history.push(raw.trim()); hIdx=history.length; }
+    var res=dispatch(raw);
+    if(res===undefined) return;          // async command handles its own output
+    if(res===null){ scroll(); return; }  // e.g. clear
+    printOut(res);
+  }
+
+  // ---------- input handling ----------
+  function focusCap(){ if(!booting) cap.focus({preventScroll:true}); }
+  function render(){ typed.textContent=cap.value; }
+  screenEl.addEventListener('mousedown', function(e){
+    if(e.target.closest('a')) return;         // let links work
+    setTimeout(focusCap,0);
+  });
+  cap.addEventListener('input', render);
+  cap.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){
+      e.preventDefault(); var v=cap.value; cap.value=''; render(); run(v);
+    } else if(e.key==='ArrowUp'){
+      e.preventDefault(); if(hIdx>0){ hIdx--; cap.value=history[hIdx]||''; render(); }
+    } else if(e.key==='ArrowDown'){
+      e.preventDefault(); if(hIdx<history.length){ hIdx++; cap.value=history[hIdx]||''; render(); }
+    } else if(e.key==='Tab'){
+      e.preventDefault(); autocomplete();
+    } else if(e.key==='l' && e.ctrlKey){
+      e.preventDefault(); output.innerHTML='';
+    }
+  });
+  function autocomplete(){
+    var v=cap.value.trim(); if(!v) return;
+    var names=Object.keys(CMD).concat(['tour']);
+    var hits=names.filter(function(n){return n.indexOf(v)===0;});
+    if(hits.length===1){ cap.value=hits[0]+' '; render(); }
+    else if(hits.length>1){
+      echoCmd(v); printOut(hits.map(function(h){return '<span class="p">'+h+'</span>';}).join('   '));
+    }
+  }
+
+  // ---------- chips ----------
+  ['help','about','experience','projects','skills','achievements','contact','neofetch','tour'].forEach(function(c){
+    var b=document.createElement('button'); b.textContent=c;
+    b.addEventListener('click', function(){ if(booting) return; run(c); focusCap(); });
+    chipsBar.appendChild(b);
+  });
+
+  // ---------- typewriter (boot + tour) ----------
+  function type(str, done){
+    if(reduce){ typed.textContent=str; cap.value=str; done&&done(); return; }
+    var i=0; cap.value='';
+    (function step(){
+      cap.value=str.slice(0,i); render();
+      if(i++<str.length){ setTimeout(step, 34+Math.random()*40); }
+      else { setTimeout(function(){ done&&done(); }, 260); }
+    })();
+  }
+  function startTour(){
+    var seq=['whoami','about','experience','projects','achievements','contact'];
+    caret.classList.remove('hide');
+    (function next(){
+      if(!seq.length){ printOut('<span class="dim">— end of tour. type</span> <span class="k">help</span> <span class="dim">to explore on your own.</span>'); return; }
+      var c=seq.shift();
+      type(c, function(){ cap.value=''; render(); run(c); setTimeout(next, reduce?200:650); });
+    })();
+  }
+
+  // ---------- boot ----------
+  var BANNER=[
+    '<span class="banner">'+
+    ' __   __ _   ____  _   _   _____ _______        ___    ____  ___ \n'+
+    ' \\ \\ / // \\ / ___|| | | | |_   _| ____\\ \\      / / \\  |  _ \\|_ _|\n'+
+    '  \\ V // _ \\\\___ \\| |_| |   | | |  _|  \\ \\ /\\ / / _ \\ | |_) || | \n'+
+    '   | |/ ___ \\___) |  _  |   | | | |___  \\ V  V / ___ \\|  _ < | | \n'+
+    '   |_/_/   \\_\\____/|_| |_|   |_| |_____|  \\_/\\_/_/   \\_\\_| \\_\\___|'+
+    '</span>'
+  ].join('');
+  function boot(){
+    var steps=[
+      '<span class="dim">portfolio.sh — booting…</span>',
+      '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] mounting /experience /projects /skills</span>',
+      '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] kafka consumer group attached · lag 0</span>',
+      '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] loaded 3 services · 3 featured projects</span>'
+    ];
+    var i=0;
+    (function tick(){
+      if(i<steps.length){ print(steps[i++]); setTimeout(tick, reduce?0:230); return; }
+      print('<div class="scrollx">'+BANNER+'</div>');
+      printOut(
+        'Hi, I\'m <b>Yash Tewari</b> — <span class="k">Software Engineer</span> '+
+        '<span class="dim">(backend · distributed systems · GenAI)</span>.\n'+
+        '<span class="dim">This is an interactive terminal. Type</span> <span class="k">help</span> '+
+        '<span class="dim">for commands, or</span> <span class="k">tour</span> '+
+        '<span class="dim">for a guided walkthrough. Tap the chips below if you\'d rather click.</span>'
+      );
+      booting=false; caret.classList.remove('hide'); focusCap();
+    })();
+  }
+
+  caret.classList.add('hide');
+  boot();
 })();
 </script>
 
