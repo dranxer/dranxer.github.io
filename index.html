@@ -235,16 +235,31 @@
   });
 
   var PROJECTS={
-    'low-light':{title:'Low-Light Image Enhancement', repo:'low-light-image-enhancement', feat:true,
+    'minidb':{title:'minidb — a database engine from scratch', repo:'minidb', feat:true,
+      tech:'Python · B+tree · Write-Ahead Log · MVCC · SQL',
+      body:'A real storage engine: disk-backed <b>B+tree</b> index, <b>write-ahead log</b> for\n'+
+           'crash recovery, <b>MVCC</b> snapshot-isolation transactions, and a SQL front-end.\n'+
+           'Kill it mid-write and WAL replay restores every committed row. <span class="val">13 tests</span>, zero deps.'},
+    'raftkv':{title:'raftkv — Raft consensus from scratch', repo:'raftkv', feat:true,
+      tech:'Python · Consensus · Replication · Snapshots',
+      body:'Full <b>Raft</b>: leader election, log replication, persistence and snapshots, driven\n'+
+           'by a deterministic fault-injecting network. Chaos tests prove <span class="ok">no split-brain</span>\n'+
+           'under partitions across 15 seeds. <span class="val">7 chaos tests</span>.'},
+    'minikafka':{title:'minikafka — a distributed commit log', repo:'minikafka', feat:true,
+      tech:'Python · Segmented Log · Partitions · ISR',
+      body:'A Kafka-style log: <b>segmented</b> append-only partitions with an offset index,\n'+
+           '<b>idempotent producer</b>, consumer groups with rebalancing, and replication with an\n'+
+           '<b>ISR</b> + high-watermark. <span class="val">~165k rec/s</span> · <span class="val">11 tests</span>.'},
+    'low-light':{title:'Low-Light Image Enhancement', repo:'low-light-image-enhancement',
       tech:'Python · TensorFlow · CNNs · Self-Attention',
       body:'Extended the <b>MIRNet</b> deep CNN with <b>self-attention</b> for long-range spatial\n'+
            'dependency modeling in degraded images; optimized the TF training pipeline to\n'+
            'beat baselines. <span class="val">PSNR ~62</span> · <span class="ok">1st place</span>, IIT Roorkee Hackathon 2024 (50+ teams).'},
-    'pdf-qa':{title:'PDF Question-Answering System', repo:'pdf-qa-rag', feat:true,
+    'pdf-qa':{title:'PDF Question-Answering System', repo:'pdf-qa-rag',
       tech:'Python · BERT · LangChain · FAISS · FastAPI · RAG',
       body:'Fine-tuned <b>BERT</b> on SQuAD for extractive QA, wrapped in a <b>RAG</b> pipeline\n'+
            '(LangChain + FAISS) over FastAPI. <span class="val">+18%</span> accuracy · <span class="val">−40%</span> latency · <span class="val">−25%</span> hallucination.'},
-    'dashboard':{title:'Full-Stack Content Dashboard', repo:'Web-Annotator-Project', feat:true,
+    'dashboard':{title:'Full-Stack Content Dashboard', repo:'Web-Annotator-Project',
       tech:'React · Node.js · PostgreSQL · LLaMA · Flask · JWT',
       body:'3-tier reading dashboard + custom <b>Chrome extension</b> for persistent highlights.\n'+
            'Summaries run on a local <b>LLaMA</b> Flask backend — <span class="val">−100%</span> cloud inference cost.'},
@@ -474,7 +489,7 @@
       '<span class="dim">portfolio.sh — booting…</span>',
       '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] mounting /experience /projects /skills</span>',
       '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] kafka consumer group attached · lag 0</span>',
-      '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] loaded 3 services · 7 projects</span>'
+      '<span class="dim">[</span><span class="ok">ok</span><span class="dim">] loaded 3 services · 10 projects</span>'
     ];
     var i=0;
     (function tick(){
